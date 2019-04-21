@@ -15,7 +15,6 @@ byte READ = 0b00000011; //Read Data from Memory Array
 byte WRITE = 0b00000010; //Write Data to Memory Array
 byte WRINC = 0b00000111; //Write Data to Secure Array //----------
 byte ERASE = 0b01100000; //ERASE//0x60
-//byte RDID = 0b10011111; //RDID
 //"1.Instruction available only for the M95080-D device."
 byte RDID = 0b10000011; //Read Identification Page//1.//addr 000000000000 A3 A2 A1 A0
 byte WRID = 0b10000011; //Write Identification Page//1.//addr 000000000000 A3 A2 A1 A0
@@ -77,9 +76,9 @@ void loop() {
   //----replace with your VIN address, use any car test program to find KOMBI VIN then search on dump for----//
   int adr = 0x007A;
   char content[] = {0xFF,0xFF,0xFF,0xFF,0xFF};
-  for (int i = 0; i < 5 ; i++) {//sizeof(content2); i++) {
+  for (int i = 0; i < 5 ; i++) {
   //---uncomment for serial write---//
-  //write_8(adr, content[i]);//write_secure(adr, content[i], content[i+1]);//write_8(adr, content[i]);
+  //write_8(adr, content[i]);
   adr = adr + 0x1;
   }
  //------------------------Errors clear-----------------------------------------------
@@ -98,7 +97,7 @@ void loop() {
  }
  //-----------------Erase non incremental area 0x20 to 0x3FF---------------------
   adr = 0x0020;
-  for (int i = 0x20; i < 0x400 ; i++) {//sizeof(content2); i++) {
+  for (int i = 0x20; i < 0x400 ; i++) {
   //---uncomment for clear non inc registers, return area to factory state except incrementals ---//
   //write_8(adr, 0xFF);
   adr = adr + 0x0001;
@@ -107,7 +106,7 @@ void loop() {
   //-----------------A try to clear incremental register (not work)
 for (int i = 0x00; i < 0x20; i++) 
 {
-  //---uncomment for clear inc registers, return area to factory state except incrementals ---//
+  //---uncomment for clear inc registers, return area to factory state incrementals only---//
   //write_secure(adr, 0x00, 0x00);
   adr = adr + 0x0002;
 }
@@ -221,6 +220,7 @@ int read_16(int address) {
   int value = 0;
   chip_select_low();
   chip_select_high();
+    delay(3);
   chip_select_low();
   send_8(READ);
   send_address(address);
@@ -314,7 +314,7 @@ void write_secure(int address, char dat1, char dat2) {//CORRECTED !!!  (xnc)
 /***********************************************/
 /***********************************************/
 /***********************************************/
-void send_8(char dat) {//THE PAIR send_8() and read_buff() is perfect for reading status in midle of writing/erasing chip as no switch up/down chip select (xnc)
+void send_8(char dat) {//THE PAIR send_8() and read_buff() is perfect for reading status in midle of writing/erasing chip as no switch up/down chip select, though is done on reading status (xnc)
   char bit;
   for (char index = 7; index >= 0; index--) {
     bit = ((dat >> index) & 0x01);
@@ -353,9 +353,4 @@ void status(){
     digitalWrite(SS, HIGH);
     delay(3);
 }
-void inputs(){
-input = Serial.read();
-Serial.println(input);
-Serial.println(input, HEX);
-  }
 /************************ END ... OR NOT YET!!!  **************/
