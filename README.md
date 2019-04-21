@@ -1,11 +1,15 @@
-# m35080_Read_BitBang
-This default Skech now reads the full memory of EEPROM chips of the m35080 family like M35080, 08ODOWQ, M35080VP and 35080V6. </br> The read begins, after any kind of serial data is transmitted to the arduino (e.g just press the space bar and hit enter).
+# //WARNING !!!! This is not perfect and u can destroy ur chip! (xnc) //</br>  
 
-Secure Incremental Memory rages from 0x00 till 0x1F</br>
-Standard Mempory ranges from 0x20 till 0x3FF
+# m35080_Read_BitBang
+"This default Skech now reads the full memory of EEPROM chips of the m35080 family like M35080, 08ODOWQ, M35080VP and 35080V6. The read begins, after any kind of serial data is transmitted to the arduino (e.g just press the space bar and hit enter)." </br>         
+
+# One wrong comment, still read ok just 1 byte, second byte was wrong. I added "full_read_write_VIN.ino" to correct that (xnc). Working on SPI branch, may set better the timing.</br>  
+
+Secure Incremental Memory ranges from 0x00 till 0x1F</br>
+Standard Memory ranges from 0x20 till 0x3FF
 
 ## Arduino
-I used an arduino micro, but any arduino which supports SPI is fine. Just switch the board in the arduino IDE.
+I used an arduino "nano"(xnc), but any arduino which supports SPI is fine. Just switch the board in the arduino IDE.
 
 ## M35080 EEPROM
 A datasheet is included in this repo. Connect Chipselect, Clock, In, Out, Vcc(5V) and Vss accordingly. Make sure, that max. current never exceeds 10mA.
@@ -43,8 +47,8 @@ Example:
 
 ```
 int adr = 0x00;
-char val1 = 0x12;
-char val1 = 0x26;
+char val1 = 0x26;//xnc//
+char val2 = 0x12;//xnc//was most wrong example, first byte is just first byte - using previous version (reversed bytes) just destroyed forever my M35080, all incremental registers are now "0xFF" so i need help to find out the ERASE command - nothing worked until now despite i tested all commands from 0x08 to 0xFF, no one set the WIP bit on status register.
 write_secure(adr, val1, val2);
 ```
 
