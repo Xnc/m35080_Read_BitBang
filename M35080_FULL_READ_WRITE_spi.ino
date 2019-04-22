@@ -248,9 +248,13 @@ void send_8(char dat) {//THE PAIR send_8() and read_buff() is perfect for readin
     SPI.transfer(dat & 0xFF);  
 }
 /******************************************************************/
-void send_address(int dat) {
-  SPI.transfer(dat & 0xFF00);
-  SPI.transfer(dat & 0x00FF);
+void send_address(int address) {
+  byte addrHigh;
+  byte addrLow;
+  addrHigh = (address >> 8) & 0xFF;
+  addrLow = address & 0xFF;
+  SPI.transfer(addrHigh);
+  SPI.transfer(addrLow);
 }
 /************************************************************/
 void status(){
