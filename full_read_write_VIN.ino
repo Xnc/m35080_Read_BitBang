@@ -128,8 +128,8 @@ for (int i = 0x00; i < 0x20; i++)
     }      
     if (index == 0x10) {Serial.print("\n");}
     aux16 = read_16(index);
-    auxHigh = aux16 / 0x100;
-    auxLow = aux16 % 0x100; 
+    auxHigh = (aux16 >> 8) & 0xFF;
+    auxLow = aux16 & 0xFF; 
     if (auxHigh <= 0xF) Serial.print("0");
     Serial.print(auxHigh , HEX);
     Serial.print(" "); 
