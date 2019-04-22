@@ -60,9 +60,6 @@ void loop() {
     send_8(WREN);
     digitalWrite(SS, HIGH);
     digitalWrite(SS, LOW);
-    send_8(WRINC);
-    digitalWrite(SS, HIGH);
-    digitalWrite(SS, LOW);
     send_8(RDSR);
     status();//in case of status incorrect some areas/half/all chip may be impossible to write so need WRSR to correct it - use it with attention
     digitalWrite(SS, HIGH);
@@ -85,7 +82,7 @@ void loop() {
   adr = 0x0020;//----replace with your errors address, not easy to find it
   for (int i = 0; i < 16 ; i++) {
   //---uncomment for clear errors---//  
-  //write_8(adr, 0x00]);
+  //write_8(adr, 0x00);
   adr = adr + 0x0001;
   }
  //------------------------Counters clear (usualy service/oil intervals)-----------------------------------------------
