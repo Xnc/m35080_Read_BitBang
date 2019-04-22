@@ -87,7 +87,7 @@ void loop() {
   adr = 0x0020;//----replace with your errors address, not easy to find it
   for (int i = 0; i < 16 ; i++) {
   //---uncomment for clear errors---//  
-  //write_8(adr, 0x00]);
+  //write_8(adr, 0x00);
   adr = adr + 0x0001;
   }
  //------------------------Counters clear (usualy service/oil intervals)-----------------------------------------------
