@@ -54,7 +54,8 @@ void setup() {
 
 void loop() {
   while (Serial.available() <= 0) {
-  } 
+  }  
+  SPI.beginTransaction(SPISettings (2000000, MSBFIRST, SPI_MODE0));//5000000  
   byte address = 0x0000;
     int received;
     int cnt = 0x00;
