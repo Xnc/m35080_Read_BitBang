@@ -1,4 +1,4 @@
-# //WARNING !!!! This is not perfect and u can destroy ur chip! I dont take any responsabillity for ilegal use !!! (xnc) //</br>  
+# WARNING !!!! This is not perfect and u can destroy ur chip! I dont take any responsabillity for ilegal use !!! (xnc) </br>  
 
 # m35080_Read_BitBang
 "This default Skech now reads the full memory of EEPROM chips of the m35080 family like M35080, 08ODOWQ, M35080VP and 35080V6. The read begins, after any kind of serial data is transmitted to the arduino (e.g just press the space bar and hit enter)." </br>         
