@@ -107,7 +107,8 @@ void loop() {
   }
   status();//check status if not erase 
   //-----------------A try to clear incremental register (not work)
-for (int i = 0x00; i < 0x20; i++) 
+  adr = 0x0000;
+  for (int i = 0x00; i < 0x10; i++) 
 {
   //---uncomment for clear inc registers, return area to factory state incrementals only---//
   //write_secure(adr, 0x00, 0x00);
