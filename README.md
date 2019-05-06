@@ -44,11 +44,14 @@ Please keep in mind, that you can only count up these values, so be careful what
 *YOU CAN'T WRITE LOWER NUMBERS THAN WHAT IS ALREADY IN THERE*
 
 Example:
-
 ```
 int adr = 0x00;
 char val1 = 0x26;//xnc//
-char val2 = 0x12;//xnc//was most wrong example, first byte is just first byte - using previous version (reversed bytes) just destroyed forever my M35080, all incremental registers are now "0xFF" so i need help to find out the ERASE command - nothing worked until now despite i tested all commands from 0x08 to 0xFF, no one set the WIP bit on status register.
+char val2 = 0x12;//xnc//was most wrong example, 
+//first byte is just first byte - using previous version (reversed bytes)
+//just destroyed forever my M35080, all incremental registers are now "0xFF" 
+//so i need help to find out the ERASE command - nothing worked until now 
+//despite i tested all commands from 0x08 to 0xFF, no one set the WIP bit on status register.
 write_secure(adr, val1, val2);
 ```
 
